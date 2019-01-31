@@ -25,10 +25,6 @@ const routes: Routes = [
             loadChildren: './blank-page/blank-page.module#BlankPageModule'
           },
           {
-            path: 'board',
-            loadChildren: './board/board.module#BoardModule'
-          },
-          {
             path: 'muro',
             loadChildren: './muro/muro.module#MuroModule'
           },
