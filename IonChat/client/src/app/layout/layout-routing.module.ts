@@ -1,3 +1,4 @@
+import { Friend } from './../models/Friend';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -21,6 +22,10 @@ const routes: Routes = [
             loadChildren: './profile/profile.module#ProfileModule'
           },
           {
+            path: 'userprofile',
+            loadChildren: './userprofile/userprofile.module#UserprofileModule'
+          },
+          {
             path: 'blank',
             loadChildren: './blank-page/blank-page.module#BlankPageModule'
           },
@@ -31,6 +36,10 @@ const routes: Routes = [
           {
             path: '**',
             redirectTo: 'muro'
+          },
+          {
+          path: 'Friend',
+          redirectTo: './friends/friends.module#FriendsModule'
           }
         ]
       }

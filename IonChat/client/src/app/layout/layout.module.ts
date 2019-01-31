@@ -11,6 +11,7 @@ import { ChatComponent } from './chat/chat.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 
+
 @NgModule({
     imports: [CommonModule, LayoutRoutingModule, NgbDropdownModule, FormsModule],
     declarations: [LayoutComponent, NavbarComponent, SidebarComponent, ChatComponent, NotFoundComponent]
