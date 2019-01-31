@@ -20,12 +20,16 @@
     </ul>
     <ul class="nav justify-content-end" style="color:#5b8bec;">
       <li class="nav-item">
-        <a class="nav-link inline" [routerLink]="['/profile']"><i class="far fa-user-circle fa-2x"></i> <b>{{ user.name
+<<<<<<< HEAD
+        <a class="nav-link inline" [routerLink]="['/userprofile']"><i class="far fa-user-circle fa-2x"></i> <b>{{ user.name
             }} {{user.lastName}}</b>
+=======
+        <a class="nav-link inline"><i class="far fa-user-circle fa-2x"></i> <b>{{user.name}} {{user.lastName}}</b>
+>>>>>>> b64cab9c3286eb34fcf037feb0816424b970b3e2
           <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"><i class="fas fa-users fa-2x"></i><span class="sr-only">(current)</span></a>
+        <a class="nav-link"  [routerLink]="['/friends']" ><i class="fas fa-users fa-2x"></i><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link"> <i class="fas fa-envelope fa-2x"></i><span class="sr-only">(current)</span></a>
@@ -47,7 +51,6 @@
           </li>
         </ul>
       </div>
-
     </ul>
   </div>
 </nav>

@@ -12,6 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpModule } from '@angular/http';
 
 
+
 @NgModule({
     imports: [CommonModule, LayoutRoutingModule, NgbDropdownModule, FormsModule, HttpModule],
     declarations: [LayoutComponent, NavbarComponent, SidebarComponent, ChatComponent, NotFoundComponent]

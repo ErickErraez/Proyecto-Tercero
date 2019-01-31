@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { PublicationService } from 'src/app/services/CRUD/publication.service';
 import { Publication } from 'src/app/models/Publication';
@@ -14,6 +16,8 @@ export class MuroComponent implements OnInit {
   constructor(private publicationService: PublicationService, private http: Http) {
     this.publication = new Publication;
   }
+
+  constructor(public router: Router, public authDataServise: AuthService) { }
 
   ngOnInit() {
 
@@ -43,5 +47,7 @@ export class MuroComponent implements OnInit {
 
     });
   }
+
+ 
 
 }
