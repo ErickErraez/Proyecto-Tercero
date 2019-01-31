@@ -1,37 +1,42 @@
-
 <div class="muro-scroll">
-  <div class="card">
-    <div class="card-header">
-      <h5 class="card-title"><i class="fas fa-edit"></i>Publicacion</h5>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <form>
-            <div class="form-group">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title"><i class="fas fa-edit"></i>Publicacion</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="text-right">
+                  <button type="button" class="btn btn-outline-primary">Publicar</button>
+                </div>
+              </form>
             </div>
-            <div class="text-right">
-              <button type="button" class="btn btn-outline-primary">Publicar</button>
-            </div>
-          </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card" *ngFor="let item of content">
+        <div class="card-header">
+          <h5 class="card-title"><i class="fas fa-edit"></i>{{item.nombre}}</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h6>{{item.contenido}}</h6>
+            </div><br>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <br>
-  <div class="card" *ngFor="let item of content">
-    <div class="card-header">
-      <h5 class="card-title"><i class="fas fa-edit"></i>{{item.nombre}}</h5>
+    <div class="col-1"></div>
+    <div class="col-3">
+        <app-friends-on></app-friends-on>
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <h6>{{item.contenido}}</h6>
-        </div><br>
-        
-      </div>
-    </div>
-
   </div>
 </div>

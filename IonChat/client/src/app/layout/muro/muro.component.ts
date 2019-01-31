@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./muro.component.scss']
 })
 export class MuroComponent implements OnInit {
+  
 
-  constructor() { }
+  constructor(public router: Router, public authDataServise: AuthService) { }
 
   ngOnInit() {
   }
+
+ 
 
 }
