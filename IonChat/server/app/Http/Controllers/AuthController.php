@@ -83,7 +83,7 @@ class AuthController extends Controller
           'lastName'=>$result['lastName'],
           'nickName'=>$result['nickName'],
           'gender'=>$result['gender'],
-          'birthdate'=>$result['birthdate'],
+          'birthday'=>$result['birthdate'],
           'name'=>$result['name'],
           'email'=>$email,
           'password'=>$new_password,

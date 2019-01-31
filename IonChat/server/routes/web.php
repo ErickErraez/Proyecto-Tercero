@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-   return 'Web Wervice Realizado con LSCodeGenerator';
+   return 'Web Wervice Funcionando';
 });
 
 $router->group(['middleware' => []], function () use ($router) {
