@@ -1,0 +1,53 @@
+<div class="container" class="register-page">
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 pretty-form">
+      <div class="col-12 text-center">
+        <h3 class="title">Registro Usuarios IonChat</h3>
+        <img src="assets/images/logo.png" width="auto" height="100px" />
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="name" placeholder="Nombre" [(ngModel)]="name" />
+          </div>
+          <div class="col">
+            <label for="exampleInputEmail1">Apellido</label>
+            <input type="text" class="form-control" id="apellido" placeholder="Apellido" [(ngModel)]="lastName" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="exampleInputEmail1">Apodo</label>
+            <input type="text" class="form-control" id="apodo" placeholder="Apodo" [(ngModel)]="nickName" />
+          </div>
+          <div class="col">
+            <label for="exampleInputEmail1">Sexo</label>
+            <select class="custom-select" id="sexo" [(ngModel)]="gender" name="gender">
+              <option selected>Seleccione...</option>
+              <option value="H">Hombre</option>
+              <option value="M">Mujer</option>
+            </select>
+          </div>
+        </div>
+        <label for="exampleInputEmail1">Fecha Nacimiento</label>
+        <input type="date" class="form-control" id="birthdate" [(ngModel)]="birthdate" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Correo Electrónico</label>
+        <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" [(ngModel)]="email" />
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-primary mr-2" (click)="registrar()">
+            Crear Cuenta
+          </button>
+          <a [routerLink]="['/login']" class="btn btn-danger">
+            Regresar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
