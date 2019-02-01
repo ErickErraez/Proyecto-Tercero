@@ -1,9 +1,9 @@
-<div style="width: 277px; height: 500px; overflow-y: scroll;">
-  <div #scrollBox class="contact-scroll" [scrollTop]="scrollBox.scrollHeight">
-    <ul class="list-group" *ngFor="let item of amigos">
-      <li class="list-group-item d-flex justify-content-between aling-items-center">
-        {{item.nombre}}
-        <span class="badge badge-primary badge-pill">1</span>
+<div style="width: 230px; height: 500px; overflow-y: scroll;">
+  <div class="card" style="width: 13rem;">
+    <ul class="list-group list-group-flush" *ngFor="let item of amigos">
+      <li class="list-group-item"> {{item.nombre}} 
+        <span class="badge badge-primary badge-pill">{{item.mensajes}}</span>
+        <button type="button" style="width: 2rem;" class=" fas fa-comment"></button>
       </li>
     </ul>
   </div>

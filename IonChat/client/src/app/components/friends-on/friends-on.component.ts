@@ -13,7 +13,8 @@ export class FriendsOnComponent implements OnInit {
   constructor() { 
 
     for(let index = 0; index < 18; index++){
-      this.prueba.nombre = 'juan' + index;
+      this.prueba.nombre = 'juanaaaaaaaa';
+      this.prueba.mensajes= index;
       this.amigos.push(this.prueba);}
   }
 
