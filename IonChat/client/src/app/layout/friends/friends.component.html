@@ -1,40 +1,22 @@
 
-<div class="card">
-    <div class="card-header">
-           <h5 class="card-title">Solicitudes</h5>
-    </div>
-    <div class="card-body">
-       
-      <p class="card-text"><i class="fas fa-frown"></i>No hay solicitudes de amistad nuevas</p>
-    </div>
-</div>
-<div class="card-header">
-    <h5 class="card-title">Talvez conozcas</h5>
-</div>
-<div class="card-group">
+<div>
+  <ul class="list-grup list-group-flush" *ngFor="let items of amigos">
+    <div class="card">
+      <div class="row">
+        <div class="col-1">   
+        <img class="rounded mb-2" src="assets/images/user.png" height="100px" width="100px"  >
+        </div>
+        <div class="col-9">
 
-<div class="card">
-  <img class="card-img-top" src="https://www.psicoactiva.com/blog/wp-content/uploads/2017/07/hombre-soltero-feliz.jpg" alt="Card image cap" width="120" height="120">
-  <div class="card-body">
-    <h5 class="card-title">Mofle</h5>
-    <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i>Agregar</a>
-    <a href="#" class="btn btn-primary">Eliminar</a>
-  </div>
+        <i class="fas fa-user-circle">Talvez conozcas a {{items.nombre}}</i> 
+     
+      <li class="list-group-item"> 
+          
+        <button type="button" style="width: 2rem;"><i class="fas fa-plus"></i></button>
+        <button type="button" style="width: 2rem;"><i class="fas fa-times"></i></button>
+      </li>
+    </div>
+     </div>
+    </div>
+  </ul>
 </div>
-<div class="card">
-  <img class="card-img-top" src="http://2.bp.blogspot.com/-itYtAL5lBeE/TkFdlIhhacI/AAAAAAAABHI/HYGHzdl85UI/s400/111433_aerogenerador.jpg" alt="Card image cap" width="120" height="120">
-  <div class="card-body">
-    <h5 class="card-title">Rodrigo</h5>
-    <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i>Agregar</a>
-    <a href="#" class="btn btn-primary">Eliminar</a>
-  </div>
-</div>
-<div class="card">
-  <img class="card-img-top" src="https://media.aweita.larepublica.pe/678x508/aweita/imagen/2018/02/08/noticia-persona-positiva.png" alt="Card image cap" width="100" height="100">
-  <div class="card-body">
-    <h5 class="card-title">Maria</h5>
-    <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i>Agregar</a>
-    <a href="#" class="btn btn-primary">Eliminar</a>
-  </div>
-
-</div> 

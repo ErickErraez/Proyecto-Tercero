@@ -7,7 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendsComponent implements OnInit {
 
-  constructor() { }
+  amigos: any = [];
+  prueba: any = {};
+
+  constructor() {
+    for (let index = 0; index < 18; index++) {
+      this.prueba.nombre = 'amigo';
+      this.prueba.mensajes = index;
+      this.amigos.push(this.prueba);
+    }
+  }
 
   ngOnInit() {
   }
