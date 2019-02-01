@@ -1,36 +1,45 @@
-<div class="muro-scroll">
-  <div class="card">
-    <div class="card-header">
-      <h5 class="card-title"><i class="fas fa-edit"></i>Publicacion</h5>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <form>
-            <input type="text" class="form-control" [(ngModel)]="content" name="content">
-
-            <div class="text-right">
-              <button type="button" class="btn btn-outline-primary" (click)="publicar()">Publicar</button>
-
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="muro-scroll">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title"><i class="fas fa-edit"></i>Publicacion</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <form>
+                  <input type="text" class="form-control" [(ngModel)]="content" name="content">
+                  <br>
+                  <div class="text-right">
+                    <button type="button" class="btn btn-outline-primary" (click)="publicar()">Publicar</button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
+          </div>
+        </div>
+        <br>
+        <div class="card" *ngFor="let item of listPublication">
+          <div class="card-header" *ngFor="let person of listUsers">
+            <ng-container *ngIf="item.idUser == person.id">
+              <h5 class="card-title"><i class="fas fa-edit"></i> {{ person.name }} Ha
+                compartido
+                una Publicacion </h5>
+            </ng-container>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h6>{{item.content}}</h6>
+              </div><br>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-2"></div>
   </div>
-</div> <br>
-<!--
-  <div class="card" >
-    <div class="card-header">
-      <h5 class="card-title"><i class="fas fa-edit"></i>{{item.nombre}}</h5>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12">
-          <h6>{{item.contenido}}</h6>
-        </div><br>
-
-      </div>
-    </div>
-
-  </div>-->
+</div>

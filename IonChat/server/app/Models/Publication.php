@@ -12,7 +12,7 @@ class Publication extends Model
      * @var array
      */
     protected $fillable = [
-       'content','date',
+       'content','date','idUser',
     ];
 
     /**
