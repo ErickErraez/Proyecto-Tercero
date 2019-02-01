@@ -6,5 +6,5 @@ export class User {
    gender: String;
    email: String;
    password: String;
-   apiToken: String;
+   api_token: String;
 }

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublicationService } from 'src/app/services/CRUD/publication.service';
 import { Publication } from 'src/app/models/Publication';
 import { Http } from '@angular/http';
+import { UserService } from 'src/app/services/CRUD/user.service';
 
 @Component({
   selector: 'app-muro',
@@ -12,12 +13,12 @@ import { Http } from '@angular/http';
 })
 export class MuroComponent implements OnInit {
   content: String;
+  fecha: any;
   publication: Publication;
-  constructor(private publicationService: PublicationService, private http: Http) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private publicationService: PublicationService, private userService: UserService, private http: Http, public router: Router, public authDataServise: AuthService) {
     this.publication = new Publication;
   }
-
-  constructor(public router: Router, public authDataServise: AuthService) { }
 
   ngOnInit() {
 
@@ -25,19 +26,14 @@ export class MuroComponent implements OnInit {
 
   publicar() {
     // tslint:disable-next-line:max-line-length
-    const fecha_utc = new Date(1999, 10, 30);
+    const x = JSON.parse(sessionStorage.getItem('user'));
     this.publication.content = this.content;
-    this.publication.date = fecha_utc;
-    this.publicationService.post(this.publication).then(response => {
-      swal({
-        title: 'Has realizado una publicacion',
-        text: 'Correcto',
-        icon: 'success',
-      }).then(r => {
-        this.getPublication();
-      });
-    }).catch();
-
+    this.publication.idUser = x.id;
+    this.publicationService.post(this.publication).then(r => {
+      console.log(r);
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
   getPublication() {
@@ -47,7 +43,4 @@ export class MuroComponent implements OnInit {
 
     });
   }
-
- 
-
 }

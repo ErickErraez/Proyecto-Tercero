@@ -39,7 +39,7 @@ class UserController extends Controller
              'gender'=>$result['gender'],
              'email'=>$result['email'],
              'password'=>$result['password'],
-             'apiToken'=>$result['apiToken'],
+             'api_token'=>$result['api_token'],
           ]);
           DB::commit();
        } catch (Exception $e) {
@@ -60,7 +60,7 @@ class UserController extends Controller
              'gender'=>$result['gender'],
              'email'=>$result['email'],
              'password'=>$result['password'],
-             'apiToken'=>$result['apiToken'],
+             'api_token'=>$result['api_token'],
           ]);
           DB::commit();
        } catch (Exception $e) {

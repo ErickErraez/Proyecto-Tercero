@@ -12,7 +12,6 @@ export class RegisterComponent implements OnInit {
 
   name: String = '';
   lastName: String = '';
-  nickName: String = '';
   gender: String = '';
   birthdate: Date;
   email: String = '';
@@ -23,13 +22,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.name = '';
     this.lastName = '';
-    this.nickName = '';
     this.gender = '';
     this.email = '';
   }
 
   registrar() {
-    if (this.name === '' || this.lastName === '' || this.nickName === '' || this.gender === '' || this.email === '') {
+    if (this.name === '' || this.lastName === '' || this.gender === '' || this.email === '') {
       swal({
         title: 'Datos Incompletos',
         text: 'Completar todos los datos',
@@ -37,7 +35,7 @@ export class RegisterComponent implements OnInit {
       });
     } else {
       // tslint:disable-next-line:max-line-length
-      this.busy = this.authDataServise.register(this.name, this.lastName, this.nickName, this.gender, this.birthdate, this.email).then(r => {
+      this.busy = this.authDataServise.register(this.name, this.lastName, this.gender, this.birthdate, this.email).then(r => {
         swal({
           title: 'Te damos la bienvenida',
           text: 'Enviamos tu contraseña a tu correo',

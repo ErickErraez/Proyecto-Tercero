@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.busy = this.authDataServise.login(this.email, this.password).then(r => {
       sessionStorage.setItem('api-token', r.token);
       sessionStorage.setItem('isLoggedin', 'true');
-      const userData = { id: r.id, name: r.name, lastName: r.lastName, nickName: r.nickName };
+      const userData = { id: r.id, name: r.name, lastName: r.lastName};
       sessionStorage.setItem('user', JSON.stringify(userData));
       this.router.navigate(['/muro']);
     }).catch(e => {

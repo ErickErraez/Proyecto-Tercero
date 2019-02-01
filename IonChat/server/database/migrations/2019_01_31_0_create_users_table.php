@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
           $table->string('gender',1)->nullable($value = true);
           $table->string('email',255)->nullable($value = true);
           $table->string('password',10)->nullable($value = true);
-          $table->string('apiToken',255)->nullable($value = true);
+          $table->string('api_token',255)->nullable($value = true);
           $table->unique(['email']);
        });
     }

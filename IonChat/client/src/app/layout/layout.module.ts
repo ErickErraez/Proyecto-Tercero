@@ -6,15 +6,10 @@ import { LayoutComponent } from './layout.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { ChatComponent } from './chat/chat.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpModule } from '@angular/http';
 
-
-
 @NgModule({
-    imports: [CommonModule, LayoutRoutingModule, NgbDropdownModule, FormsModule, HttpModule],
-    declarations: [LayoutComponent, NavbarComponent, SidebarComponent, ChatComponent, NotFoundComponent]
+    imports: [CommonModule, LayoutRoutingModule, NgbDropdownModule, HttpModule],
+    declarations: [LayoutComponent, NavbarComponent, SidebarComponent]
 })
 export class LayoutModule { }

@@ -79,15 +79,13 @@ class AuthController extends Controller
       $result = $data->json()->all();
       $email = $result['email'];
       $user = User::create([
-          'name'=>$result['name'],
-          'lastName'=>$result['lastName'],
-          'nickName'=>$result['nickName'],
-          'gender'=>$result['gender'],
-          'birthday'=>$result['birthdate'],
-          'name'=>$result['name'],
-          'email'=>$email,
-          'password'=>$new_password,
-          'apiToken'=>str_random(64),
+        'name'=>$result['name'],
+        'lastName'=>$result['lastName'],
+        'gender'=>$result['gender'],
+        'birthday'=>$result['birthdate'],
+        'email'=>$email,
+        'password'=>$new_password,
+        'api_token'=>str_random(64),
       ]);
       $message = "Tu nueva contraseña es " . $new_password;
       $subject = "Te damos la bienvenida a " . env('MAIL_FROM_NAME');
@@ -113,10 +111,13 @@ class AuthController extends Controller
       if ($password === $user->password) {
         $token = $this->jwt($user);
         $response = User::where('id',$user->id)->update([
-          'apiToken'=>$token,
+          'api_token'=>$token,
         ]);
         return response()->json([
             'token' => $token,
+            'birthday' => $user->birthday,
+            'gender' => $user->gender,
+            'lastName' => $user->lastName,
             'name' => $user->name,
             'id' => $user->id
         ], 200);

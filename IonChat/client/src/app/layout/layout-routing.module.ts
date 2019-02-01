@@ -34,10 +34,6 @@ const routes: Routes = [
             loadChildren: './muro/muro.module#MuroModule'
           },
           {
-            path: '**',
-            redirectTo: 'muro'
-          },
-          {
           path: 'Friend',
           redirectTo: './friends/friends.module#FriendsModule'
           }

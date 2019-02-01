@@ -19,8 +19,8 @@ export class AuthService {
       });
   }
 
-  register(name: String, lastName: String, nickName: String, gender: String, birthdate: Date, email: String): Promise<any> {
-    const data = { name: name, lastName: lastName, nickName: nickName, gender: gender, birthdate: birthdate, email: email };
+  register(name: String, lastName: String, gender: String, birthdate: Date, email: String): Promise<any> {
+    const data = { name: name, lastName: lastName, gender: gender, birthdate: birthdate, email: email };
     return this.http.post(environment.api + 'register', JSON.stringify(data)).toPromise()
       .then(r =>
         r.json()
@@ -43,7 +43,7 @@ export class AuthService {
     const data = { new_password: new_password };
     const options = new RequestOptions();
     options.headers = new Headers();
-    options.headers.append('apiToken', sessionStorage.getItem('api-token'));
+    options.headers.append('api_token', sessionStorage.getItem('api-token'));
     return this.http.post(environment.api + 'user/password_change', JSON.stringify(data), options).toPromise()
       .then(r =>
         r.json()
