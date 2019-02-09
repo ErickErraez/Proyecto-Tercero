@@ -68,9 +68,10 @@ export class UserprofileComponent implements OnInit {
     if (this.srcFoto === '../../../assets/images/user.png') {
       return;
     }
-    if (this.image.id === 0) {
+    if (this.srcFoto !== '../../../assets/images/user.png') {
       this.image.idAlbum = 1;
-      this.image.description = 'Foto Perfil';
+      this.image.idUser = this.user.id;
+      this.image.description = 'FotoPerfil';
       this.imageService.postProfile(this.image).then(r => {
         this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
         this.image.id = r.id;

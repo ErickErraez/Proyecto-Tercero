@@ -33,9 +33,6 @@ class Friend extends Model
        return $this->belongsTo('App\User');
     }
 
-    function States()
-    {
-       return $this->belongsTo('App\State');
-    }
+
 
 }

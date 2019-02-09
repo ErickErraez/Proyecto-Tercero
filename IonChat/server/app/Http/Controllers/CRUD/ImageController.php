@@ -74,6 +74,9 @@ class ImageController extends Controller
                 'name' => $result['name'],
                 'type' => $result['type'],
                 'attached' => $result['attached'],
+                'date' => $result['date'],
+                'description' => $result['description'],
+                'idUser' => $result['idUser'],
                 'idAlbum' => $result['idAlbum'],
             ]);
             DB::commit();

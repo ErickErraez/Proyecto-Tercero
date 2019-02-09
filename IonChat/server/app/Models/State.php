@@ -24,9 +24,9 @@ class State extends Model
        
     ];
 
-    function Friend()
+    function States()
     {
-       return $this->hasMany('App\Friend');
+       return $this->belongsTo('App\Friend');
     }
 
 }

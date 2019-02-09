@@ -22,7 +22,7 @@ class CreateFriendsTable extends Migration
           $table->unsignedInteger('idFriend');
           $table->foreign('idFriend')->references('id')->on('users')->onDelete('cascade');
           $table->unsignedInteger('idState');
-          $table->foreign('idState')->references('id')->on('friends')->onDelete('cascade');
+          $table->foreign('idState')->references('id')->on('states')->onDelete('cascade');
        });
     }
 

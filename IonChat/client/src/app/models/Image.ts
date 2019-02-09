@@ -5,5 +5,6 @@ export class Image {
    attached: String;
    date: Date;
    description: String;
+   idUser: number;
    idAlbum: number;
 }
