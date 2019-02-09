@@ -17,8 +17,7 @@ class CreateAlbumsTable extends Migration
           $table->increments('id');
           $table->timestamps();
           $table->string('name',100)->nullable($value = true);
-          $table->unsignedInteger('idUser');
-          $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+        
        });
     }
 

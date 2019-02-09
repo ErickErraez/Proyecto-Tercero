@@ -75,9 +75,9 @@ export class NavbarComponent implements OnInit {
   cancelFriend() {
 
   }
-  sendFriendRequest(idUser) {
-    this.friend.idUser = idUser;
+  sendFriendRequest(person) {
     this.friend.idFriend = this.user.id;
+    this.friend.idUser = person;
     this.friendService.post(this.friend).then(r => {
 
     }).catch(e => {
