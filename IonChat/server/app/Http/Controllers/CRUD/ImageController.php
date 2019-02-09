@@ -30,14 +30,15 @@ class ImageController extends Controller
         try {
             DB::beginTransaction();
             $result = $data->json()->all();
-            $profilepicture = new Image();
-            $profilepicture->name = $result['name'];
-            $profilepicture->type = $result['type'];
-            $profilepicture->attached = $result['attached'];
-            $profilepicture->description = $result['description'];
-            $profilepicture->idUser = $data->auth->id;
-            $profilepicture->idAlbum = $data->$result['idAlbum'];
-            $profilepicture->save();
+            $image = new Image();
+            $image->type = $result['type'];
+            $image->name = $result['name'];
+            $image->attached = $result['attached'];
+            $image->date = $result['date'];
+            $image->description = $result['description'];
+            $image->idAlbum = $result['idAlbum'];
+            $image->idUser = $result['idUser'];
+            $image->save();
             DB::commit();
         } catch (Exception $e) {
             return response()->json($e, 400);
@@ -51,13 +52,15 @@ class ImageController extends Controller
         try {
             DB::beginTransaction();
             $result = $data->json()->all();
-            $image = Image::create([
-                'name' => $result['name'],
-                'type' => $result['type'],
-                'attached' => $result['attached'],
-                'date' => $result['date'],
-                'description' => $result['description'],
-            ]);
+            $image = new Image();
+            $image->type = $result['type'];
+            $image->name = $result['name'];
+            $image->attached = $result['attached'];
+            $image->date = $result['date'];
+            $image->description = $result['description'];
+            $image->idAlbum = $result['idAlbum'];
+            $image->idUser = $result['idUser'];
+            $image->save();
             DB::commit();
         } catch (Exception $e) {
             return response()->json($e, 400);
@@ -74,10 +77,6 @@ class ImageController extends Controller
                 'name' => $result['name'],
                 'type' => $result['type'],
                 'attached' => $result['attached'],
-                'date' => $result['date'],
-                'description' => $result['description'],
-                'idUser' => $result['idUser'],
-                'idAlbum' => $result['idAlbum'],
             ]);
             DB::commit();
         } catch (Exception $e) {

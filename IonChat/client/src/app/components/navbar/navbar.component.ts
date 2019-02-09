@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
     private friendService: FriendService) {
-      this.friend = new Friend();
+    this.friend = new Friend();
     this.router.events.subscribe(val => {
       if (
         val instanceof NavigationEnd &&
@@ -81,15 +81,14 @@ export class NavbarComponent implements OnInit {
 
   }
   sendFriendRequest(idUser) {
-    alert(idUser);
-    this.friend.idUser = parseInt(idUser);
+    this.friend.idUser = idUser;
     this.friend.idFriend = this.user.id;
     this.friend.idState = 1;
-console.log(this.friend);
+    console.log(this.friend);
     this.friendService.post(this.friend).then(r => {
 
     }).catch(e => {
- console.log(e,"error");
+      console.log(e);
     });
   }
 
@@ -104,13 +103,13 @@ console.log(this.friend);
     return true;
   }
 
-  getFriends(){
-    this.friendService.get().then(r=>{
-      this.friendsGets = r ; 
+  getFriends() {
+    this.friendService.get().then(r => {
+      this.friendsGets = r;
       console.log(this.friendsGets);
     })
-    .catch(e=>{
+      .catch(e => {
 
-    });
+      });
   }
 }
