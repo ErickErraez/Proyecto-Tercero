@@ -44,7 +44,7 @@ export class FriendService {
    }
 
    post(friend: Friend): Promise<any> {
-      return this.http.post(this.url, JSON.stringify(friend), this.options).toPromise()
+      return this.http.post(this.url,friend, this.options).toPromise()
       .then( r => {
          return r.json();
       }).catch( error => { return error.json(); });

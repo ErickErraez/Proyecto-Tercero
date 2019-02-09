@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-12">
                 <form>
-                  <input type="text" class="form-control" [(ngModel)]="content" name="content">
+                  <textarea type="text" class="form-control" [(ngModel)]="content" name="content"></textarea>
                   <br>
                   <div class="text-right">
                     <button type="button" class="btn btn-outline-primary" (click)="publicar()">Publicar</button>
@@ -22,21 +22,24 @@
           </div>
         </div>
         <br>
-        <div class="card" *ngFor="let item of listPublication">
-          <div class="card-header" *ngFor="let person of listUsers">
-            <ng-container *ngIf="item.idUser == person.id">
-              <h5 class="card-title"><i class="fas fa-edit"></i> {{ person.name }} Ha
-                compartido
-                una Publicacion </h5>
+        <div *ngFor="let item of listPublication">
+          <div class="card  alert-secondary">
+            <ng-container *ngFor="let person of listUsers">
+              <div class="alert alert-info" *ngIf="item.idUser == person.id">
+                <h5 class="card-title"><i class="fas fa-edit"></i> {{ person.name }} Ha
+                  compartido
+                  una Publicacion </h5>
+              </div>
             </ng-container>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <h6>{{item.content}}</h6>
-              </div><br>
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-12">
+                  <h6>{{item.content}}</h6>
+                </div><br>
+              </div>
             </div>
           </div>
+          <br>
         </div>
       </div>
     </div>

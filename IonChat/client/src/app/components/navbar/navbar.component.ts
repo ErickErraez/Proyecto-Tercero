@@ -18,9 +18,13 @@ export class NavbarComponent implements OnInit {
   friend: Friend;
   userSearched: String;
   personReturned: any = [];
+  sendFriends: any;
+  friendsGets: any = [];
+
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
     private friendService: FriendService) {
+      this.friend = new Friend();
     this.router.events.subscribe(val => {
       if (
         val instanceof NavigationEnd &&
@@ -36,6 +40,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.pushRightClass = 'push-right';
     this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.getFriends();
   }
 
   isToggled(): boolean {
@@ -76,12 +81,15 @@ export class NavbarComponent implements OnInit {
 
   }
   sendFriendRequest(idUser) {
-    this.friend.idUser = idUser;
+    alert(idUser);
+    this.friend.idUser = parseInt(idUser);
     this.friend.idFriend = this.user.id;
+    this.friend.idState = 1;
+console.log(this.friend);
     this.friendService.post(this.friend).then(r => {
 
     }).catch(e => {
-
+ console.log(e,"error");
     });
   }
 
@@ -94,5 +102,15 @@ export class NavbarComponent implements OnInit {
       this.srcFoto = 'data:' + profilePicture.type + ';base64,' + profilePicture.attached;
     }
     return true;
+  }
+
+  getFriends(){
+    this.friendService.get().then(r=>{
+      this.friendsGets = r ; 
+      console.log(this.friendsGets);
+    })
+    .catch(e=>{
+
+    });
   }
 }

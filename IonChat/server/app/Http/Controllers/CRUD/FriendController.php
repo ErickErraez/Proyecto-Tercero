@@ -32,9 +32,11 @@ class FriendController extends Controller
        try{
           DB::beginTransaction();
           $result = $data->json()->all();
-          $friend = Friend::create([
-             'date'=>$result['date'],
-          ]);
+          $friend = new Friend();
+          $friend->idUser = $result['idUser'];
+          $friend->idFriend = $result['idFriend'];
+          $friend->idState = $result['idState'];
+          $friend->save();
           DB::commit();
        } catch (Exception $e) {
           return response()->json($e,400);

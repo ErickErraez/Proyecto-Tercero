@@ -12,7 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-   return 'Web Wervice Realizado con LSCodeGenerator';
+   return  date("Y") . "/" . date("m") . "/" . date("d") ;
+   ;
 });
 
 $router->group(['middleware' => []], function () use ($router) {
