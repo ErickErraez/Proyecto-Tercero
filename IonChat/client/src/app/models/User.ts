@@ -2,7 +2,7 @@ export class User {
    id: number;
    name: String;
    lastName: String;
-   birthday: any;
+   birthdate: Date;
    gender: String;
    email: String;
    password: String;

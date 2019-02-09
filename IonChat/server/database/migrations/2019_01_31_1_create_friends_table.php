@@ -19,6 +19,10 @@ class CreateFriendsTable extends Migration
           $table->dateTime('date')->nullable($value = true);
           $table->unsignedInteger('idUser');
           $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+          $table->unsignedInteger('idFriend');
+          $table->foreign('idFriend')->references('id')->on('users')->onDelete('cascade');
+          $table->unsignedInteger('idState');
+          $table->foreign('idState')->references('id')->on('friends')->onDelete('cascade');
        });
     }
 

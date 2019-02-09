@@ -2,10 +2,13 @@
   <div class="row">
     <div class="divfotoPortada">
       <img src="assets/img/portada.jpeg" class="fotoPortada col-12" />
+      <h2 class="userNames text-ligth">{{user.name}} {{user.lastName}}</h2>
       <div class="contenedorFotoPortada col-2">
         <img (click)="fileInput.click()" class="img-fluid img-thumbnail fotoPerfilPortada rounded-circle" src="{{srcFoto}}" />
-        <input hidden=true type="file" id="foto" placeholder="Fotografía" #fileInput (change)="CodificarArchivo($event)" accept="image/*">
+        <input hidden=true type="file" id="foto" placeholder="Fotografía" #fileInput (change)="CodificarArchivo($event)"
+          accept="image/*">
       </div>
+
     </div>
   </div>
 </div>
@@ -14,12 +17,9 @@
 <div class="row">
   <div class="col-3">
     <div class="card" style="width: 18rem;">
-      <div class="card-header">
-        <i class="fas fa-edit"></i> Cambio de contraseña
+      <div class="card-header" [routerLink]="['/profile']">
+        <i class="fas fa-edit"></i> Editar Perfil
       </div>
-      <a class="dropdown-item" [routerLink]="['/profile']">
-        <i class="fas fa-key"></i>Cambiar Contraseña
-      </a>
     </div>
     <br />
     <div class="card" style="width: 18rem;">
@@ -29,8 +29,8 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
-  <div class="col-6">
+
+  <div class="col-8">
     <div class="muro-scroll">
       <div class="card">
         <div class="card-header">
@@ -40,35 +40,36 @@
           <div class="row">
             <div class="col-12">
               <form>
-                <div class="form-group">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
+                <input type="text" class="form-control" [(ngModel)]="content" name="content">
+                <br>
                 <div class="text-right">
-                  <button type="button" class="btn btn-outline-primary">
-                    Publicar
-                  </button>
+                  <button type="button" class="btn btn-outline-primary" (click)="publicate()">Publicar</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <br />
-      <div class="card" *ngFor="let item of content">
+      <br>
+      <div class="card" *ngFor="let item of listPublication">
         <div class="card-header">
-          <h5 class="card-title">
-            <i class="fas fa-edit"></i>{{ item.nombre }}
-          </h5>
+          <ng-container>
+            <h5 class="card-title"><i class="fas fa-edit"></i> {{ user.name }} Ha
+              compartido
+              una Publicacion </h5>
+          </ng-container>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col-12">
-              <h6>{{ item.contenido }}</h6>
-            </div>
-            <br />
+              <h6>{{item.content}}</h6>
+            </div><br>
           </div>
         </div>
       </div>
+      <br>
     </div>
+    <br />
+    
   </div>
 </div>

@@ -37,7 +37,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $result['name'],
                 'lastName' => $result['lastName'],
-                'birthday' => $result['birthday'],
+                'birthdate' => $result['birthdate'],
                 'gender' => $result['gender'],
                 'email' => $result['email'],
                 'password' => $result['password'],
@@ -58,11 +58,7 @@ class UserController extends Controller
             $user = User::where('id', $result['id'])->update([
                 'name' => $result['name'],
                 'lastName' => $result['lastName'],
-                'birthday' => $result['birthday'],
-                'gender' => $result['gender'],
-                'email' => $result['email'],
-                'password' => $result['password'],
-                'api_token' => $result['api_token'],
+                'birthdate' => $result['birthdate'],
             ]);
             DB::commit();
         } catch (Exception $e) {

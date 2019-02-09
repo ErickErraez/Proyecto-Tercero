@@ -69,6 +69,7 @@ $router->group(['middleware' => ['auth']], function () use ($router) {
 
    //CRUD Image
    $router->post('/image', ['uses' => 'ImageController@post']);
+   $router->post('/image/profile', ['uses' => 'ImageController@postProfile']);
    $router->get('/image', ['uses' => 'ImageController@get']);
    $router->get('/image/paginate', ['uses' => 'ImageController@paginate']);
    $router->put('/image', ['uses' => 'ImageController@put']);

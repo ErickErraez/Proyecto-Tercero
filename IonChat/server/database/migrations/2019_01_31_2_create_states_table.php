@@ -17,8 +17,7 @@ class CreateStatesTable extends Migration
           $table->increments('id');
           $table->timestamps();
           $table->text('description')->nullable($value = true);
-          $table->unsignedInteger('idFriend');
-          $table->foreign('idFriend')->references('id')->on('friends')->onDelete('cascade');
+         
        });
     }
 

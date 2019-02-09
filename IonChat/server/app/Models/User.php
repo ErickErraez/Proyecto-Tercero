@@ -12,7 +12,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-       'name','lastName','birthday','gender','email','password','api_token',
+       'name','lastName','birthdate','gender','email','password','api_token',
     ];
 
     /**
@@ -34,9 +34,9 @@ class User extends Model
        return $this->hasMany('App\Interest');
     }
 
-    function Albums()
+    function Image()
     {
-       return $this->hasMany('App\Album');
+       return $this->belongsTo('App\Image');
     }
 
     function Friends()

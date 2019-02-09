@@ -1,7 +1,7 @@
 <div style="width: 230px; height: 500px; overflow-y: scroll;">
   <div class="card" style="width: 13rem;">
     <ul class="list-group list-group-flush" *ngFor="let item of amigos">
-      <li class="list-group-item"> {{item.nombre}} 
+      <li class="list-group-item" (click)="prueba1()"> {{item.nombre}} 
         <span class="badge badge-primary badge-pill">{{item.mensajes}}</span>
         <button type="button" style="width: 2rem;" class=" fas fa-comment"></button>
       </li>

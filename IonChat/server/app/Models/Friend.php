@@ -28,10 +28,14 @@ class Friend extends Model
     {
        return $this->belongsTo('App\User');
     }
+    function Friend()
+    {
+       return $this->belongsTo('App\User');
+    }
 
     function States()
     {
-       return $this->hasMany('App\State');
+       return $this->belongsTo('App\State');
     }
 
 }

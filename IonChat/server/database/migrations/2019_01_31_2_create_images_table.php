@@ -21,6 +21,8 @@ class CreateImagesTable extends Migration
           $table->text('attached')->nullable($value = true);
           $table->dateTime('date')->nullable($value = true);
           $table->text('description')->nullable($value = true);
+          $table->unsignedInteger('idUser');
+          $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
           $table->unsignedInteger('idAlbum');
           $table->foreign('idAlbum')->references('id')->on('albums')->onDelete('cascade');
        });

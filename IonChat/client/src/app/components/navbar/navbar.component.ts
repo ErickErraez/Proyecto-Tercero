@@ -2,6 +2,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/CRUD/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FriendService } from 'src/app/services/CRUD/friend.service';
+import { Friend } from 'src/app/models/Friend';
+import { Image } from 'src/app/models/Image';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +14,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
   public pushRightClass: string;
   user: any;
+  srcFoto = '../../../assets/images/user.png';
+  friend: Friend;
   userSearched: String;
   personReturned: any = [];
 
-  constructor(private modalService: NgbModal, public router: Router, private userServices: UserService) {
+  constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
+    private friendService: FriendService) {
     this.router.events.subscribe(val => {
       if (
         val instanceof NavigationEnd &&
@@ -57,11 +63,36 @@ export class NavbarComponent implements OnInit {
   open(content) {
     this.searchPerson();
     this.modalService.open(content).result.then((result => {
-      if (result === 'save') {
 
-      }
+      console.log(result);
     }), (result => {
 
     }));
+  }
+  acceptFriend() {
+
+  }
+  cancelFriend() {
+
+  }
+  sendFriendRequest(idUser) {
+    this.friend.idUser = idUser;
+    this.friend.idFriend = this.user.id;
+    this.friendService.post(this.friend).then(r => {
+
+    }).catch(e => {
+
+    });
+  }
+
+  refreshUser(): Boolean {
+    if (JSON.parse(sessionStorage.getItem('user')) !== null) {
+      this.user = JSON.parse(sessionStorage.getItem('user'));
+    }
+    if (JSON.parse(sessionStorage.getItem('profilePicture')) !== null) {
+      const profilePicture = JSON.parse(sessionStorage.getItem('profilePicture')) as Image;
+      this.srcFoto = 'data:' + profilePicture.type + ';base64,' + profilePicture.attached;
+    }
+    return true;
   }
 }

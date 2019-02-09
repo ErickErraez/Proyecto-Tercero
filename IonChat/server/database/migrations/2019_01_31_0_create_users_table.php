@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
           $table->timestamps();
           $table->string('name',255)->nullable($value = true);
           $table->string('lastName',255)->nullable($value = true);
-          $table->date('birthday')->nullable($value = true);
+          $table->date('birthdate')->nullable($value = true);
           $table->string('gender',1)->nullable($value = true);
           $table->string('email',255)->nullable($value = true);
           $table->string('password',10)->nullable($value = true);
