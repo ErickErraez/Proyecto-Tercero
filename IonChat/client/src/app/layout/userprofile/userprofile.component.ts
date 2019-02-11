@@ -26,13 +26,14 @@ export class UserprofileComponent implements OnInit {
   constructor(private userService: UserService, private modalService: NgbModal, private http: Http,
     private publicationService: PublicationService, private imageService: ImageService) {
     this.image = new Image();
+    this.user = new User();
     this.publication = new Publication;
     this.getPublication();
     this.getUser();
   }
 
   ngOnInit() {
-
+    this.getProfilePicture();
   }
 
 
@@ -80,27 +81,24 @@ export class UserprofileComponent implements OnInit {
         this.image.type = file.type;
         this.image.attached = reader.result.toString().split(',')[1];
         this.srcFoto = 'data:' + this.image.type + ';base64,' + this.image.attached;
-        this.view = true;
+        this.savePicture();
       };
     }
   }
 
-  open(content) {
-    this.modalService.open(content).result.then((result => {
-      if (result === 'save') {
-        this.guardarFoto();
-      }
+  getProfilePicture() {
+    this.imageService.get().then(r => {
+      this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+      sessionStorage.setItem('image', JSON.stringify(r));
+    }).catch(e => {
 
-    }), (result => {
-
-    }));
+    });
   }
 
-  guardarFoto() {
-
+  savePicture() {
     this.image.idAlbum = 1;
     this.image.idUser = this.user.id;
-    this.imageService.postProfile(this.image).then(r => {
+    this.imageService.post(this.image).then(r => {
       this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
       this.image.id = r.id;
       sessionStorage.setItem('image', JSON.stringify(this.image));

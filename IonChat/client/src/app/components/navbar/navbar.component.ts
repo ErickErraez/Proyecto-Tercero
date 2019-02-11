@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FriendService } from 'src/app/services/CRUD/friend.service';
 import { Friend } from 'src/app/models/Friend';
 import { Image } from 'src/app/models/Image';
+import { ImageService } from 'src/app/services/CRUD/image.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,7 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
-    private friendService: FriendService) {
+    private friendService: FriendService, private imageService: ImageService) {
     this.friend = new Friend();
     this.router.events.subscribe(val => {
       if (
@@ -92,13 +93,23 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  getProfilePicture() {
+    this.imageService.get().then(r => {
+      this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+      sessionStorage.setItem('image', JSON.stringify(r));
+    }).catch(e => {
+
+    });
+  }
+
   refreshUser(): Boolean {
     if (JSON.parse(sessionStorage.getItem('user')) !== null) {
       this.user = JSON.parse(sessionStorage.getItem('user'));
     }
-    if (JSON.parse(sessionStorage.getItem('profilePicture')) !== null) {
-      const profilePicture = JSON.parse(sessionStorage.getItem('profilePicture')) as Image;
+    if (JSON.parse(sessionStorage.getItem('image')) !== null) {
+      const profilePicture = JSON.parse(sessionStorage.getItem('image')) as Image;
       this.srcFoto = 'data:' + profilePicture.type + ';base64,' + profilePicture.attached;
+      console.log(this.srcFoto);
     }
     return true;
   }
@@ -106,7 +117,6 @@ export class NavbarComponent implements OnInit {
   getFriends() {
     this.friendService.get().then(r => {
       this.friendsGets = r;
-      console.log(this.friendsGets);
     })
       .catch(e => {
 

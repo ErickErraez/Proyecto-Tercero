@@ -4,11 +4,11 @@
       <img src="assets/img/portada.jpeg" class="fotoPortada col-12" />
       <h2 class="userNames text-ligth">{{user.name}} {{user.lastName}}</h2>
       <div class="contenedorFotoPortada col-2">
-        <img (click)="fileInput.click()" class="img-fluid img-thumbnail fotoPerfilPortada rounded-circle"
+        <img (click)="fileInput.click()" class="card-img img-thumbnail fotoPerfilPortada rounded-circle"
           src="{{srcFoto}}" />
         <input hidden=true type="file" id="foto" placeholder="Fotografía" #fileInput (change)="CodificarArchivo($event)"
           accept="image/*">
-        <button type="button" class="btn btn-primary">Guardar</button>
+       
       </div>
     </div>
   </div>

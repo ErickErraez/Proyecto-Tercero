@@ -60,14 +60,6 @@ export class ImageService {
          });
    }
 
-   postProfile(image: Image): Promise<any> {
-      return this.http.post(this.url + 'profile', JSON.stringify(image), this.options).toPromise()
-         .then(r => {
-            return r.json();
-         }).catch(error => {
-            return error.json();
-         });
-   }
 
    put(image: Image): Promise<any> {
       return this.http.put(this.url, JSON.stringify(image), this.options).toPromise()

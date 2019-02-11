@@ -11,9 +11,11 @@ class ImageController extends Controller
 {
     public function get(Request $data)
     {
-        $profilepicture = Image::where('idUser', $data->auth->id)->first();
-        if ($profilepicture) {
-            return response()->json($profilepicture, 200);
+        $image = DB::table('images')
+            ->orderBy('created_at', 'desc')
+            ->first();
+        if ($image) {
+            return response()->json($image, 200);
         } else {
             return response()->json(["error" => "Record not found."], 400);
         }
@@ -25,47 +27,24 @@ class ImageController extends Controller
         return response()->json(Image::paginate($size), 200);
     }
 
-    public function postProfile()
+    public function post(Request $data)
     {
         try {
             DB::beginTransaction();
             $result = $data->json()->all();
-            $image = new Image();
-            $image->type = $result['type'];
-            $image->name = $result['name'];
-            $image->attached = $result['attached'];
-            $image->date = $result['date'];
-            $image->description = $result['description'];
-            $image->idAlbum = $result['idAlbum'];
-            $image->idUser = $result['idUser'];
-            $image->save();
+            $profilepicture = new Image();
+            $profilepicture->type = $result['type'];
+            $profilepicture->name = $result['name'];
+            $profilepicture->attached = $result['attached'];
+            $profilepicture->idUser = $data->auth->id;
+            $profilepicture->idAlbum = $result['idAlbum'];
+            $profilepicture->save();
             DB::commit();
         } catch (Exception $e) {
             return response()->json($e, 400);
         }
         return response()->json($profilepicture, 200);
 
-    }
-
-    public function post(Request $data)
-    {
-        try {
-            DB::beginTransaction();
-            $result = $data->json()->all();
-            $image = new Image();
-            $image->type = $result['type'];
-            $image->name = $result['name'];
-            $image->attached = $result['attached'];
-            $image->date = $result['date'];
-            $image->description = $result['description'];
-            $image->idAlbum = $result['idAlbum'];
-            $image->idUser = $result['idUser'];
-            $image->save();
-            DB::commit();
-        } catch (Exception $e) {
-            return response()->json($e, 400);
-        }
-        return response()->json($image, 200);
     }
 
     public function put(Request $data)

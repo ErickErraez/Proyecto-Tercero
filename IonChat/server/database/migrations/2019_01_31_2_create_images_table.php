@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration
           $table->timestamps();
           $table->string('name',255)->nullable($value = true);
           $table->string('type',255)->nullable($value = true);
-          $table->text('attached')->nullable($value = true);
+          $table->longText('attached')->nullable($value = true);
           $table->dateTime('date')->nullable($value = true);
           $table->text('description')->nullable($value = true);
           $table->unsignedInteger('idUser');
