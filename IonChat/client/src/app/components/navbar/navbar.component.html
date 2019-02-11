@@ -14,14 +14,13 @@
 
       <form class="form-inline">
         <input type="text" class="form-control" [(ngModel)]="userSearched" name="userSearched">
-        <button class="btn btn-outline-info estiloRedondo" type="submit" (click)="open(content)"><i
-            class="fas fa-search"></i></button>
+        <button class="btn btn-outline-info estiloRedondo" type="submit" (click)="open(content)"><i class="fas fa-search"></i></button>
       </form>
 
     </ul>
     <ul class="nav justify-content-end" style="color:#5b8bec;">
       <li class="nav-item">
-        <a class="nav-link inline" [routerLink]="['/userprofile']"> <img class="card-img" src="{{srcFoto}}"
+        <a class="nav-link inline" [routerLink]="['/userprofile']"> <img class="card-img" src="../../../assets/home.jpg"
             class="fotos rounded-circle">
           <b *ngIf="refreshUser()">{{ user.name }} {{user.lastName}}</b>
         </a>
@@ -29,18 +28,24 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <li class="nav-item dropdown dropdown-menu-lg-right" ngbDropdown>
-            <a href="javascript:void(0)" class="nav-link text-light positionList" ngbDropdownToggle><i
-                class="fas fa-users fa-2x"></i><span class="sr-only">(current)</span></a>
+            <a href="javascript:void(0)" class="nav-link text-light positionList" ngbDropdownToggle><i class="fas fa-users fa-2x"></i><span
+                class="sr-only">(current)</span></a>
             <div class="dropdown-menu dropdown-menu-lg-right" ngbDropdownMenu>
-              <a class="dropdown-item">
-                <div class="row">
-                  <div class="col-1"><img src="{{srcFoto}}" width="40" height="40" alt="" /></div>
-                  <div class="col-1"></div>
-                  <div class="col-9"> <span>Erick Erraez te ha enviado </span> <br>
-                    <span>una solicitud de amistad</span>
-                    <div class="col-1">
-                      <button type="submit" class="btn btn-primary" (click)="acceptFriend()">Agregar</button>
-                      <button type="submit" class="btn btn-danger" (click)="cancelFriend()">Cancelar</button>
+              <a class="dropdown-item" *ngFor="let item of friendsGets">
+                <ng-container *ngFor="let items of nameFriends">
+                  <ng-container >
+                    <div class="row" *ngIf="user.id === item.idUser">
+                      <ng-container *ngIf="item.idFriend === items.id">
+                        <div class="col-1"><img src="../../../assets/images/logo.png" width="40" height="40" alt="" /></div>
+                        <div class="col-1"></div>
+                        <div class="col-9"> <span>{{items.name}} te ha enviado </span> <br>
+                          <span>una solicitud de amistad</span>
+                          <div class="col-1">
+                            <button type="submit" class="btn btn-primary" (click)="acceptFriend()">Agregar</button>
+                            <button type="submit" class="btn btn-danger" (click)="cancelFriend()">Cancelar</button>
+                          </div>
+                        </div>
+                      </ng-container>
                     </div>
               </a>
             </div>
