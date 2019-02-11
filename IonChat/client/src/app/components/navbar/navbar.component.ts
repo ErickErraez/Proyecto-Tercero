@@ -126,11 +126,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getName() {
-    this.userServices.get().then(r=>{
+    this.userServices.get().then(r => {
       this.nameFriends = r;
       console.log(this.nameFriends);
-    }).catch(e=>{
-      console.log(e,"Error en traer nombres")
-    })
+    }).catch(e => {
+      console.log('Error en traer nombres');
+    });
   }
 }
