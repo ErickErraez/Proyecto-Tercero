@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   personReturned: any = [];
   sendFriends: any;
   friendsGets: any = [];
+  nameFriends: any = [];
 
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
     this.pushRightClass = 'push-right';
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.getFriends();
+    this.getName();
   }
 
   isToggled(): boolean {
@@ -111,5 +113,14 @@ export class NavbarComponent implements OnInit {
       .catch(e => {
 
       });
+  }
+
+  getName() {
+    this.userServices.get().then(r=>{
+      this.nameFriends = r;
+      console.log(this.nameFriends);
+    }).catch(e=>{
+      console.log(e,"Error en traer nombres")
+    })
   }
 }

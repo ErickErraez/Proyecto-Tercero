@@ -31,18 +31,24 @@
             <a href="javascript:void(0)" class="nav-link text-light positionList" ngbDropdownToggle><i class="fas fa-users fa-2x"></i><span
                 class="sr-only">(current)</span></a>
             <div class="dropdown-menu dropdown-menu-lg-right" ngbDropdownMenu>
-              <a class="dropdown-item"  *ngFor="let item of friendsGets">
-                <div class="row">
-                  <div class="col-1"><img src="../../../assets/images/logo.png" width="40" height="40" alt="" /></div>
-                  <div class="col-1" ></div>
-                  <div class="col-9"> <span>{{item.idUser}} te ha enviado </span> <br>
-                    <span>una solicitud de amistad</span>
-                    <div class="col-1">
-                      <button type="submit" class="btn btn-primary" (click)="acceptFriend()">Agregar</button>
-                      <button type="submit" class="btn btn-danger" (click)="cancelFriend()">Cancelar</button>
+              <a class="dropdown-item" *ngFor="let item of friendsGets">
+                <ng-container *ngFor="let items of nameFriends">
+                  <ng-container >
+                    <div class="row" *ngIf="user.id === item.idUser">
+                      <ng-container *ngIf="item.idFriend === items.id">
+                        <div class="col-1"><img src="../../../assets/images/logo.png" width="40" height="40" alt="" /></div>
+                        <div class="col-1"></div>
+                        <div class="col-9"> <span>{{items.name}} te ha enviado </span> <br>
+                          <span>una solicitud de amistad</span>
+                          <div class="col-1">
+                            <button type="submit" class="btn btn-primary" (click)="acceptFriend()">Agregar</button>
+                            <button type="submit" class="btn btn-danger" (click)="cancelFriend()">Cancelar</button>
+                          </div>
+                        </div>
+                      </ng-container>
                     </div>
-                  </div>
-                </div>
+                  </ng-container>
+                </ng-container>
               </a>
             </div>
           </li>
