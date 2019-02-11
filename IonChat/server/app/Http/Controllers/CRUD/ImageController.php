@@ -11,13 +11,22 @@ class ImageController extends Controller
 {
     public function get(Request $data)
     {
-        $image = DB::table('images')
-            ->orderBy('created_at', 'desc')
-            ->first();
-        if ($image) {
-            return response()->json($image, 200);
+        $id = $data['id'];
+        if ($id == null) {
+            $image = DB::table('images')->orderBy('created_at', 'desc')
+                ->get();
+            if ($image) {
+                return response()->json($image, 200);
+            }
         } else {
-            return response()->json(["error" => "Record not found."], 400);
+            $image = DB::table('images')->where('idUser', '=', $id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+            if ($image) {
+                return response()->json($image, 200);
+            } else {
+                return response()->json(["error" => "Record not found."], 400);
+            }
         }
     }
 
@@ -36,7 +45,7 @@ class ImageController extends Controller
             $profilepicture->type = $result['type'];
             $profilepicture->name = $result['name'];
             $profilepicture->attached = $result['attached'];
-            $profilepicture->idUser = $data->auth->id;
+            $profilepicture->idUser = $result['idUser'];
             $profilepicture->idAlbum = $result['idAlbum'];
             $profilepicture->save();
             DB::commit();

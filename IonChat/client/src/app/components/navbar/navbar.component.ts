@@ -6,6 +6,7 @@ import { FriendService } from 'src/app/services/CRUD/friend.service';
 import { Friend } from 'src/app/models/Friend';
 import { Image } from 'src/app/models/Image';
 import { ImageService } from 'src/app/services/CRUD/image.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ import { ImageService } from 'src/app/services/CRUD/image.service';
 })
 export class NavbarComponent implements OnInit {
   public pushRightClass: string;
-  user: any;
+  user: User;
   srcFoto = '../../../assets/images/user.png';
   friend: Friend;
   userSearched: String;
@@ -22,6 +23,9 @@ export class NavbarComponent implements OnInit {
   sendFriends: any;
   friendsGets: any = [];
   nameFriends: any = [];
+  pictureFriend: any;
+  picture: any = [];
+  pictureReturned: any;
 
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
@@ -44,6 +48,8 @@ export class NavbarComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.getFriends();
     this.getName();
+    this.getProfilePicture();
+    this.getFriendPicture();
   }
 
   isToggled(): boolean {
@@ -89,16 +95,23 @@ export class NavbarComponent implements OnInit {
     this.friend.idState = 1;
     console.log(this.friend);
     this.friendService.post(this.friend).then(r => {
-
+      swal({
+        title: 'Solicitud Enviada Correctamente',
+        icon: 'success',
+      });
     }).catch(e => {
       console.log(e);
     });
   }
 
   getProfilePicture() {
-    this.imageService.get().then(r => {
-      this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
-      sessionStorage.setItem('image', JSON.stringify(r));
+    this.imageService.get(this.user.id).then(r => {
+      if (r.error === 'Record not found.') {
+        this.srcFoto = 'assets/images/user.png';
+      } else {
+        this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+        sessionStorage.setItem('image', JSON.stringify(r));
+      }
     }).catch(e => {
 
     });
@@ -111,7 +124,6 @@ export class NavbarComponent implements OnInit {
     if (JSON.parse(sessionStorage.getItem('image')) !== null) {
       const profilePicture = JSON.parse(sessionStorage.getItem('image')) as Image;
       this.srcFoto = 'data:' + profilePicture.type + ';base64,' + profilePicture.attached;
-      console.log(this.srcFoto);
     }
     return true;
   }
@@ -123,6 +135,23 @@ export class NavbarComponent implements OnInit {
       .catch(e => {
 
       });
+  }
+
+  getFriendPicture(idFriend) {
+
+    this.imageService.get().then(r => {
+      this.pictureFriend = r;
+      for (let i = 0; i < this.nameFriends.length; i++) {
+        this.imageService.get(this.pictureFriend[i].idUser).then(response => {
+          this.pictureReturned = 'data:' + response.type + ';base64,' + response.attached;
+        }).catch(e => {
+
+        });
+      }
+    }).catch(e => {
+
+    });
+
   }
 
   getName() {

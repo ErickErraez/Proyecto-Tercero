@@ -30,10 +30,11 @@ export class UserprofileComponent implements OnInit {
     this.publication = new Publication;
     this.getPublication();
     this.getUser();
+    this.getProfilePicture();
   }
 
   ngOnInit() {
-    this.getProfilePicture();
+
   }
 
 
@@ -87,9 +88,14 @@ export class UserprofileComponent implements OnInit {
   }
 
   getProfilePicture() {
-    this.imageService.get().then(r => {
-      this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
-      sessionStorage.setItem('image', JSON.stringify(r));
+    const userId = JSON.parse(sessionStorage.getItem('user'));
+    this.imageService.get(userId.id).then(r => {
+      if (r.error === 'Record not found.') {
+        this.srcFoto = 'assets/images/user.png';
+      } else {
+        this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+        sessionStorage.setItem('image', JSON.stringify(r));
+      }
     }).catch(e => {
 
     });
@@ -102,6 +108,10 @@ export class UserprofileComponent implements OnInit {
       this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
       this.image.id = r.id;
       sessionStorage.setItem('image', JSON.stringify(this.image));
+      swal({
+        title: 'Foto de Perfil Actualizada',
+        icon: 'success',
+      });
     }).catch(e => console.log(e));
   }
 }

@@ -10,6 +10,7 @@ export class ImageService {
 
    url = environment.api + 'image/';
    options = new RequestOptions();
+   srcFoto: any;
 
    constructor(private http: Http) {
       this.options.headers = new Headers();
