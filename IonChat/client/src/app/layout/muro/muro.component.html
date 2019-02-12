@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-1"></div>
+    <div class="col-10">
       <div class="muro-scroll">
         <div class="card">
           <div class="card-header">
@@ -9,14 +9,32 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 text-center">
                 <form>
-                  <textarea type="text" class="form-control" [(ngModel)]="content" name="content"></textarea>
+                  <textarea *ngIf="!isPicture" type="text" class="form-control" [(ngModel)]="content"
+                    name="content"></textarea>
                   <br>
-                  <div class="text-right">
-                    <button type="button" class="btn btn-outline-primary" (click)="publicar()">Publicar</button>
-                  </div>
+                  <img *ngIf="isPicture" src="{{srcFoto}}" width="300" height="300">
+
                 </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <i (click)="fileInput.click()" class="fas fa-camera fa-2x colorCamera"><span
+                    class="sr-only">(current)</span></i>
+                <input hidden=true type="file" id="foto" placeholder="Fotografía" #fileInput
+                  (change)="CodificarArchivo($event)" accept="image/*">
+              </div>
+              <div class="col-6">
+                <div class="text-right">
+                  <button *ngIf="!isPicture" type="button" class="btn btn-outline-primary"
+                    (click)="publicar()">Publicar</button>
+                  <button *ngIf="isPicture" type="button" class="btn btn-outline-primary"
+                    (click)="publicarFoto()">Publicar</button>
+                  <button *ngIf="isPicture" type="submit" class="btn btn-danger"
+                    (click)="isPicture = false">Cancelar</button>
+                </div>
               </div>
             </div>
           </div>
@@ -31,7 +49,7 @@
                   una Publicacion </h5>
               </div>
             </ng-container>
-            <div class="card-body ">
+            <div class="card-body">
               <div class="row">
                 <div class="col-12">
                   <h6>{{item.content}}</h6>
@@ -41,9 +59,27 @@
           </div>
           <br>
         </div>
+        <div *ngFor="let item of listImage">
+          <div class="card  alert-secondary">
+            <ng-container *ngFor="let person of listUsers">
+              <div class="alert alert-info" *ngIf="item.idUser == person.id">
+                <h5 class="card-title"><i class="fas fa-edit"></i> {{ person.name }} Ha
+                  compartido
+                  una Publicacion </h5>
+              </div>
+            </ng-container>
+            <div class="card-body text-center">
+              <div class="row">
+                <div class="col-12">
+                  <img src="{{item.srcFoto}}" width="300" height="300">
+                </div><br>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
       </div>
     </div>
-    <div class="col-1"></div>
     <div class="col-1">
       <app-friends-on></app-friends-on>
     </div>

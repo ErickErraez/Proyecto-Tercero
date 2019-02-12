@@ -71,4 +71,24 @@ export class ImageService {
          });
    }
 
+   getPicturePublicate(): Promise<any> {
+
+      return this.http.get(this.url + 'publicate', this.options).toPromise()
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
+   }
+
+   getPicturePortada(): Promise<any> {
+
+      return this.http.get(this.url + 'portada', this.options).toPromise()
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
+   }
+
 }

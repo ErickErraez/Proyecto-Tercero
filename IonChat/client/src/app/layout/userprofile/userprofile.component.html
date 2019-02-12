@@ -1,9 +1,9 @@
 <div class="container-fluid marginPortada">
   <div class="row">
     <div class="divfotoPortada">
-      <img src="assets/img/portada.jpeg" class="fotoPortada col-12" />
-      <input hidden=true type="file" id="foto" placeholder="Fotografía" #fileInput (change)="CodificarArchivo($event)"
-        accept="image/*">
+      <img (click)="filePortada.click()" src="{{listImage}}" class="card-img img-thumbnail fotoPortada col-12">
+      <input hidden=true type="file" id="foto" placeholder="Fotografía" #filePortada
+        (change)="savePicturePortada($event)" accept="image/*">
       <h2 class="userNames text-ligth">{{user.name}} {{user.lastName}}</h2>
       <div class="contenedorFotoPortada col-2">
         <img (click)="fileInput.click()" class="card-img img-thumbnail fotoPerfilPortada rounded-circle"

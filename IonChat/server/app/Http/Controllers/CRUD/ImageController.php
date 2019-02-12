@@ -30,6 +30,30 @@ class ImageController extends Controller
         }
     }
 
+    public function getPublicate(Request $data)
+    {
+        $image = DB::table('images')->where('idAlbum', '=', 2)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        if ($image) {
+            return response()->json($image, 200);
+        } else {
+            return response()->json(["error" => "Record not found."], 400);
+        }
+    }
+
+    public function getPortada(Request $data)
+    {
+        $image = DB::table('images')->where('idAlbum', '=', 3)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        if ($image) {
+            return response()->json($image, 200);
+        } else {
+            return response()->json(["error" => "Record not found."], 400);
+        }
+    }
+
     public function paginate(Request $data)
     {
         $size = $data['size'];

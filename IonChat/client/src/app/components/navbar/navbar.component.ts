@@ -109,8 +109,10 @@ export class NavbarComponent implements OnInit {
       if (r.error === 'Record not found.') {
         this.srcFoto = 'assets/images/user.png';
       } else {
-        this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
-        sessionStorage.setItem('image', JSON.stringify(r));
+        if (r.idAlbum === 1) {
+          this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+          sessionStorage.setItem('image', JSON.stringify(r));
+        }
       }
     }).catch(e => {
 
@@ -137,7 +139,7 @@ export class NavbarComponent implements OnInit {
       });
   }
 
-  getFriendPicture(idFriend) {
+  getFriendPicture() {
 
     this.imageService.get().then(r => {
       this.pictureFriend = r;

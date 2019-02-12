@@ -15,11 +15,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class UserprofileComponent implements OnInit {
   @ViewChild('fileInput') fileInput;
+  @ViewChild('filePortada') filePortada;
   user: User;
+  listImage = 'assets/img/portada.jpeg';
   view = false;
   image: Image;
   content: String;
-  srcFoto = '../../../assets/images/user.png';
+  srcFoto = '';
   listPublication: any = [];
   publication: Publication;
 
@@ -31,6 +33,7 @@ export class UserprofileComponent implements OnInit {
     this.getPublication();
     this.getUser();
     this.getProfilePicture();
+    this.getImagePortada();
   }
 
   ngOnInit() {
@@ -93,8 +96,10 @@ export class UserprofileComponent implements OnInit {
       if (r.error === 'Record not found.') {
         this.srcFoto = 'assets/images/user.png';
       } else {
-        this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
-        sessionStorage.setItem('image', JSON.stringify(r));
+        if (r.idAlbum === 1) {
+          this.srcFoto = 'data:' + r.type + ';base64,' + r.attached;
+          sessionStorage.setItem('image', JSON.stringify(r));
+        }
       }
     }).catch(e => {
 
@@ -113,5 +118,45 @@ export class UserprofileComponent implements OnInit {
         icon: 'success',
       });
     }).catch(e => console.log(e));
+  }
+
+  savePicturePortada(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.image.name = file.name;
+        this.image.type = file.type;
+        this.image.attached = reader.result.toString().split(',')[1];
+        this.listImage = 'data:' + this.image.type + ';base64,' + this.image.attached;
+        this.savePortada();
+      };
+    }
+
+  }
+
+  savePortada() {
+
+    console.log(this.image);
+    this.image.idAlbum = 3;
+    this.image.idUser = this.user.id;
+    this.imageService.post(this.image).then(r => {
+      this.listImage = 'data:' + r.type + ';base64,' + r.attached;
+      swal({
+        title: 'Foto de Portada Actualizada',
+        icon: 'success',
+      });
+      this.getImagePortada();
+    }).catch(e => console.log(e));
+
+  }
+
+  getImagePortada() {
+    this.imageService.getPicturePortada().then(r => {
+      this.listImage = 'data:' + r.type + ';base64,' + r.attached;
+    }).catch(e => {
+
+    });
   }
 }
