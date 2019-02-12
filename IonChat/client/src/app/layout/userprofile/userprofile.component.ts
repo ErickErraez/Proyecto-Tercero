@@ -32,12 +32,12 @@ export class UserprofileComponent implements OnInit {
     this.publication = new Publication;
     this.getPublication();
     this.getUser();
-    this.getProfilePicture();
     this.getImagePortada();
   }
 
   ngOnInit() {
 
+    this.getProfilePicture();
   }
 
 
@@ -154,7 +154,12 @@ export class UserprofileComponent implements OnInit {
 
   getImagePortada() {
     this.imageService.getPicturePortada().then(r => {
-      this.listImage = 'data:' + r.type + ';base64,' + r.attached;
+      if (r.error === 'Record not found.') {
+        this.listImage = 'assets/img/portada.jpeg';
+      } else {
+        this.listImage = 'data:' + r.type + ';base64,' + r.attached;
+      }
+
     }).catch(e => {
 
     });

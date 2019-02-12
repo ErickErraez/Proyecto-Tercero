@@ -131,7 +131,7 @@ class AuthController extends Controller
     $payload = [
         'subject' => $user->id,
         'creation_time' => time(),
-        'expiration_time' => time() + 60*60
+        'expiration_time' => time() + 120*120
     ];
     return JWT::encode($payload, env('JWT_SECRET'));
   }

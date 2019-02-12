@@ -34,16 +34,17 @@
             <div class="dropdown-menu dropdown-menu-lg-right" ngbDropdownMenu>
               <a class="dropdown-item" *ngFor="let item of friendsGets">
                 <ng-container *ngFor="let items of nameFriends">
-                  <ng-container>
+                  <ng-container *ngIf="!acceptRequest">
                     <div class="row" *ngIf="user.id === item.idUser">
                       <ng-container *ngIf="item.idFriend === items.id">
-                        <div class="col-1"><img class="picturePosition rounded-circle" src="{{pictureReturned}}" width="40" height="40">
+                        <div class="col-1"><img class="picturePosition rounded-circle" src="{{pictureReturned}}"
+                            width="40" height="40">
                         </div>
                         <div class="col-8"> <span>{{items.name}} {{items.lastName}} te ha enviado </span> <br>
                           <span>una solicitud de amistad</span>
                           <div class="col-1">
-                            <button type="submit" class="btn btn-primary" (click)="acceptFriend()">Agregar</button>
-                            <button type="submit" class="btn btn-danger" (click)="cancelFriend()">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" (click)="acceptFriend(item.idFriend)">Agregar</button>
+                            <button type="submit" class="btn btn-danger" (click)="cancelFriend(item.id)">Cancelar</button>
                           </div>
                         </div>
                       </ng-container>
@@ -90,17 +91,20 @@
     <div class="card-body">
       <div class="row">
         <div class="col-10" *ngFor="let person of personReturned">
-          <div class="row">
-            <div class="col-4">
-              <img src="assets/images/logo.png" width="60" height="60" alt="" />
-            </div>
-            <div class="col-6">
-              <label>{{person.name}} {{person.lastName}} {{person.birthday }} años</label>
-              <button type="submit" class="btn btn-primary" (click)="sendFriendRequest(person.id)">Agregar</button>
-            </div>
+          <div class="row" *ngIf="person.id !== user.id">
+            <ng-container *ngIf="!isRequest">
+              <div class="col-4">
+                <img src="{{pictureReturned}}" width="60" height="60" alt="" />
+              </div>
+              <div class="col-6">
+                <label>{{person.name}} {{person.lastName}} {{person.birthday }} años</label>
+                <button type="submit" class="btn btn-primary" (click)="sendFriendRequest(person.id)">Agregar</button>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </ng-template>

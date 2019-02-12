@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col-1"></div>
     <div class="col-10">
       <div class="muro-scroll">
         <div class="card">
@@ -80,11 +79,49 @@
         </div>
       </div>
     </div>
-    <div class="col-1">
-      <app-friends-on></app-friends-on>
+    <div class="col-2">
+      <div style="width: 300px; height: 199px; overflow-y: scroll;">
+        <ng-container *ngFor="let item of friendsGets">
+          <ng-container *ngFor="let items of nameFriends">
+            <ng-container *ngIf="x.id === item.idUser">
+              <ng-container *ngIf="item.idFriend === items.id">
+                <ng-container *ngIf="item.idState === 2">
+                  <div class="card alert-info" style="width: 15rem;">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item" (click)="openMesaje(items.id)"> {{items.name}}
+                        <span class="badge badge-primary badge-pill"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+      <br>
+      <div class="card" style="width: 15rem;" *ngIf="viewMesaje">
+        <div class="alert alert-primary" style="width: 15rem;" role="alert">
+          {{userMesaje.name}}
+        </div>
+        <div class="card-body message-scroll" style="width: 15rem; height: 14rem;">
+          <div class="message-group" *ngFor="let message of conversation">
+            <ng-container>
+              <div *ngIf="message.type == 'Text'" class="message"
+                [ngClass]="x.id == message.idUser ? 'me-message' : 'friend-message'">
+                {{  message.content }}</div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row" style="width: 18rem;">
+          <div class="col-8">
+            <textarea [(ngModel)]="mensaje.content" name="content" id="" style="width: 12rem;"></textarea>
+          </div>
+          <div class="col-1"> <br>
+            <i class="fas fa-arrow-circle-right fa-2x" (click)="enviarMensaje()"></i></div>
+
+        </div>
+      </div>
     </div>
+
   </div>
-  <div class="row">
-    <app-chat></app-chat>
-  </div>
-</div>

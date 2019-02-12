@@ -28,5 +28,9 @@ class Message extends Model
     {
        return $this->belongsTo('App\User');
     }
-
+    
+    function Friend()
+    {
+       return $this->belongsTo('App\User');
+    }
 }

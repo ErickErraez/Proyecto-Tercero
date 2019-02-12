@@ -7,6 +7,7 @@ import { Friend } from 'src/app/models/Friend';
 import { Image } from 'src/app/models/Image';
 import { ImageService } from 'src/app/services/CRUD/image.service';
 import { User } from 'src/app/models/User';
+import { MessageService } from 'src/app/services/CRUD/message.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,20 +17,26 @@ import { User } from 'src/app/models/User';
 export class NavbarComponent implements OnInit {
   public pushRightClass: string;
   user: User;
+  viewMesaje = false;
   srcFoto = '../../../assets/images/user.png';
   friend: Friend;
+  isRequest = false;
   userSearched: String;
   personReturned: any = [];
   sendFriends: any;
+  conversation: any[];
+  friendAcept: any;
   friendsGets: any = [];
   nameFriends: any = [];
+  acceptRequest = false;
   pictureFriend: any;
   picture: any = [];
-  pictureReturned: any;
+  request: any;
+  pictureReturned: any = [];
 
 
   constructor(private modalService: NgbModal, public router: Router, private userServices: UserService,
-    private friendService: FriendService, private imageService: ImageService) {
+    private friendService: FriendService, private imageService: ImageService, private messageServices: MessageService) {
     this.friend = new Friend();
     this.router.events.subscribe(val => {
       if (
@@ -50,6 +57,7 @@ export class NavbarComponent implements OnInit {
     this.getName();
     this.getProfilePicture();
     this.getFriendPicture();
+    this.getMesajes();
   }
 
   isToggled(): boolean {
@@ -64,7 +72,6 @@ export class NavbarComponent implements OnInit {
   searchPerson() {
     this.userServices.getName(this.userSearched).then(r => {
       this.personReturned = r;
-      console.log(r);
     }).catch(e => {
       console.log(e);
     });
@@ -74,6 +81,16 @@ export class NavbarComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
+
+  getMesajes() {
+    this.messageServices.get().then(r => {
+      this.conversation = r;
+    }).catch(e => {
+
+    });
+
+  }
+
   open(content) {
     this.searchPerson();
     this.modalService.open(content).result.then((result => {
@@ -83,22 +100,46 @@ export class NavbarComponent implements OnInit {
 
     }));
   }
-  acceptFriend() {
+
+  acceptFriend(idFriend) {
+    this.friend.idFriend = this.user.id;
+    this.friend.idUser = idFriend;
+    this.friend.idState = 2;
+    this.friendService.post(this.friend).then(r => {
+      swal({
+        title: 'Solicitud Aceptada',
+        icon: 'success',
+      });
+
+      this.acceptRequest = true;
+    })
+      .catch(e => {
+        console.log(e, 'error');
+      });
+  }
+
+  cancelFriend(id) {
+    swal({
+      title: 'Solicitud Rechazada',
+      icon: 'success',
+    });
+    this.acceptRequest = true;
 
   }
-  cancelFriend() {
 
-  }
+
   sendFriendRequest(idUser) {
     this.friend.idUser = idUser;
     this.friend.idFriend = this.user.id;
-    this.friend.idState = 1;
-    console.log(this.friend);
+    this.friend.idState = 2;
     this.friendService.post(this.friend).then(r => {
+      this.friendAcept = r;
       swal({
         title: 'Solicitud Enviada Correctamente',
         icon: 'success',
       });
+      this.isRequest = true;
+      this.request = this.friendAcept;
     }).catch(e => {
       console.log(e);
     });
@@ -159,7 +200,6 @@ export class NavbarComponent implements OnInit {
   getName() {
     this.userServices.get().then(r => {
       this.nameFriends = r;
-      console.log(this.nameFriends);
     }).catch(e => {
       console.log('Error en traer nombres');
     });

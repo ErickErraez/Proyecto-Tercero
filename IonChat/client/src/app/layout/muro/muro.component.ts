@@ -8,7 +8,10 @@ import swal from 'sweetalert';
 import { UserService } from 'src/app/services/CRUD/user.service';
 import { User } from 'src/app/models/User';
 import { Image } from 'src/app/models/Image';
+import { Message } from 'src/app/models/Message';
 import { ImageService } from 'src/app/services/CRUD/image.service';
+import { FriendService } from 'src/app/services/CRUD/friend.service';
+import { MessageService } from 'src/app/services/CRUD/message.service';
 
 @Component({
   selector: 'app-muro',
@@ -19,6 +22,10 @@ export class MuroComponent implements OnInit {
   content: String;
   @ViewChild('fileInput') fileInput;
   fecha: any;
+  friendsGets: any = [];
+  conversation: any[];
+  nameFriends: any = [];
+  mensaje: Message;
   listPublication: any = [];
   listImage: any = [];
   array = [];
@@ -26,21 +33,29 @@ export class MuroComponent implements OnInit {
   user: User;
   image: Image;
   srcFoto = '';
+  viewMesaje = false;
+  userMesaje: User;
+  idUserSend: any;
   imageReturned: any = [];
   isPicture = false;
   publication: Publication;
   x = JSON.parse(sessionStorage.getItem('user'));
 
   constructor(private publicationService: PublicationService, private userService: UserService,
-    private http: Http, public router: Router, public authDataServise: AuthService, private imageService: ImageService) {
+    private http: Http, public router: Router, public authDataServise: AuthService,
+    private imageService: ImageService, private friendService: FriendService, private messageServices: MessageService) {
     this.publication = new Publication;
     this.fecha = new Date();
+    this.mensaje = new Message();
     this.image = new Image();
     this.getPublication();
     this.getImagePublicate();
+    this.getMesajes();
   }
 
   ngOnInit() {
+    this.getFriends();
+    this.getName();
   }
 
   getUser(idUser?) {
@@ -123,4 +138,56 @@ export class MuroComponent implements OnInit {
       this.isPicture = false;
     }).catch(e => console.log(e));
   }
+
+  getFriends() {
+    this.friendService.get().then(r => {
+      this.friendsGets = r;
+    })
+      .catch(e => {
+
+      });
+  }
+
+  getName() {
+    this.userService.get().then(r => {
+      this.nameFriends = r;
+    }).catch(e => {
+      console.log('Error en traer nombres');
+    });
+  }
+
+  openMesaje(id) {
+    this.viewMesaje = true;
+    this.userService.get(id).then(r => {
+      this.userMesaje = r;
+      this.getMesajes();
+    }).catch(e => {
+
+    });
+  }
+
+  getMesajes() {
+    this.messageServices.get().then(r => {
+      this.conversation = r;
+    }).catch(e => {
+
+    });
+
+  }
+
+  enviarMensaje() {
+    this.idUserSend = JSON.parse(sessionStorage.getItem('user'));
+    this.mensaje.idUser = this.idUserSend.id;
+    this.mensaje.idFriend = this.userMesaje.id;
+    this.mensaje.type = 'Text';
+    this.messageServices.post(this.mensaje).then(r => {
+      this.mensaje.content = '';
+      this.getMesajes();
+    }).catch(e => {
+
+    });
+
+
+  }
+
 }

@@ -19,42 +19,55 @@ export class MessageService {
    get(id?: number): Promise<any> {
       if (typeof id === 'undefined') {
          return this.http.get(this.url, this.options).toPromise()
-         .then( r => {
-            return r.json();
-         }).catch( error => { return error.json(); });
+            .then(r => {
+               return r.json();
+            }).catch(error => {
+               return error.json();
+            });
       }
       return this.http.get(this.url + '?id=' + id.toString(), this.options).toPromise()
-      .then( r => {
-         return r.json();
-      }).catch( error => { return error.json(); });
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
    }
 
    get_paginate(size: number, page: number): Promise<any> {
       return this.http.get(this.url + 'paginate?size=' + size.toString() + '&page=' + page.toString(), this.options).toPromise()
-      .then( r => {
-         return r.json();
-      }).catch( error => { return error.json(); });
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
    }
 
    delete(id: number): Promise<any> {
       return this.http.delete(this.url + '?id=' + id.toString(), this.options).toPromise()
-      .then( r => {
-         return r.json();
-      }).catch( error => { return error.json(); });
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
    }
 
    post(message: Message): Promise<any> {
       return this.http.post(this.url, JSON.stringify(message), this.options).toPromise()
-      .then( r => {
-         return r.json();
-      }).catch( error => { return error.json(); });
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+            return error.json();
+         });
    }
 
    put(message: Message): Promise<any> {
       return this.http.put(this.url, JSON.stringify(message), this.options).toPromise()
-      .then( r => {
-         return r.json();
-      }).catch( error => { return error.json(); });
+         .then(r => {
+            return r.json();
+         }).catch(error => {
+
+            return error.json();
+         });
    }
 
 }

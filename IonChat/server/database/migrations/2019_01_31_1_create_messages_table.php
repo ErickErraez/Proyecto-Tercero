@@ -18,8 +18,10 @@ class CreateMessagesTable extends Migration
           $table->timestamps();
           $table->string('type',10)->nullable($value = true);
           $table->string('content',255)->nullable($value = true);
-          $table->unsignedInteger('idUser');
+          $table->unsignedInteger('idUser')->nullable($value = true);
           $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+          $table->unsignedInteger('idFriend')->nullable($value = true);;
+          $table->foreign('idFriend')->references('id')->on('users')->onDelete('cascade');
        });
     }
 
